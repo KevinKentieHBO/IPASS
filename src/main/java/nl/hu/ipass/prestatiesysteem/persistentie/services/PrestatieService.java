@@ -25,6 +25,14 @@ public class PrestatieService {
 		return Cardiodao.findAllById(sportnummer);
 	}
 	
+	public GewichtPrestatie getGewichtPrestatie(int prestatienummer) {
+		return Gewichtdao.findByNummer(prestatienummer);
+	}
+	
+	public CardioPrestatie getCardioPrestatie(int prestatienummer) {
+		return Cardiodao.findByNummer(prestatienummer);
+	}
+	
 	public List<GewichtPrestatie> getAllGewichtPrestaties(int sportersnummer){
 		return Gewichtdao.findAllById(sportersnummer);
 	}

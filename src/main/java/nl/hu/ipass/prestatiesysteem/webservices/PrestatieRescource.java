@@ -8,6 +8,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -82,6 +83,87 @@ public class PrestatieRescource {
 		bericht.put("resultaat", "Uitvoering gelukt");
 		return Response.status(200).entity(bericht).build();
 }
+	
+	@GET
+	@Path("/eengewicht{prestatienummer}")
+	@Produces("application/json")
+	public String geefGewichtPrestatie(@PathParam("prestatienummer") int prestatienummer) {
+		PrestatieService service = ServiceProvider.getPrestatieService();
+
+		GewichtPrestatie prestatie = service.getGewichtPrestatie(prestatienummer) ;
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("prestatienummer", prestatie.getPrestatienummer());
+			job.add("sportersnummer", prestatie.getSporter().getSportersnummer());
+			job.add("oefeningnummer", prestatie.getOefening().getOefeningnummer());
+			job.add("oefeningafbeelding", prestatie.getOefening().getAfbeelding());
+			job.add("datum", prestatie.getDatum());
+			job.add("volume", prestatie.getVolume());
+			job.add("sets", prestatie.getSets());
+			job.add("reps", prestatie.getReps());
+		JsonObject object = job.build();
+		return object.toString();
+}
+	
+	@GET
+	@Path("/eencardio{prestatienummer}")
+	@Produces("application/json")
+	public String geefCardioPrestatie(@PathParam("prestatienummer") int prestatienummer) {
+		PrestatieService service = ServiceProvider.getPrestatieService();
+
+		CardioPrestatie prestatie = service.getCardioPrestatie(prestatienummer) ;
+			JsonObjectBuilder job = Json.createObjectBuilder();
+			job.add("prestatienummer", prestatie.getPrestatienummer());
+			job.add("sportersnummer", prestatie.getSporter().getSportersnummer());
+			job.add("oefeningnummer", prestatie.getOefening().getOefeningnummer());
+			job.add("oefeningafbeelding", prestatie.getOefening().getAfbeelding());
+			job.add("datum", prestatie.getDatum());
+			job.add("afstand", prestatie.getAfstand());
+			job.add("snelheid", prestatie.getSnelheid());
+			job.add("sessieduur", prestatie.getSessieduur());
+		JsonObject object = job.build();
+		return object.toString();
+}
+	
+	@PUT
+	@Path("/eengewicht{prestatienummer}")
+	@Produces("application/json")
+	public Response updateGewichtPrestatie(
+				@PathParam("prestatienummer") int prestatienummer, 
+				@FormParam("gewichtprestatienummer") int gewichtpresatienummer,
+				@FormParam("sets") int sets,
+				@FormParam("reps") int reps,
+				@FormParam("volume") int volume) throws SQLException  {
+		GewichtPrestatie gw = service.updateGewicht(gewichtpresatienummer, volume, sets, reps);
+		System.out.println("gw");
+		if (gw == null) {
+			Map<String, String> messages = new HashMap<String, String>();
+			messages.put("error", "GewichtPrestatie bestaat niet!");
+			return Response.status(409).entity(messages).build();
+		}
+		Map<String, String> bericht = new HashMap<String, String>();
+		bericht.put("resultaat", "Succesvol bijgewerkt!");
+		return Response.status(200).entity(bericht).build();
+	}
+	
+	@PUT
+	@Path("/eencardio{prestatienummer}")
+	@Produces("application/json")
+	public Response updateCardioPrestatie(
+				@PathParam("prestatienummer") int prestatienummer, 
+				@FormParam("gewichtprestatienummer") int gewichtpresatienummer,
+				@FormParam("afstand") int afstand,
+				@FormParam("snelheid") int snelheid,
+				@FormParam("sessieduur") int sessieduur) throws SQLException  {
+		CardioPrestatie cp = service.updateCardio(prestatienummer, sessieduur, snelheid, afstand);
+		if (cp == null) {
+			Map<String, String> messages = new HashMap<String, String>();
+			messages.put("error", "GewichtPrestatie bestaat niet!");
+			return Response.status(409).entity(messages).build();
+		}
+		Map<String, String> bericht = new HashMap<String, String>();
+		bericht.put("resultaat", "Succesvol bijgewerkt!");
+		return Response.status(200).entity(bericht).build();
+	}
 	
 	@DELETE
 	@Path("/cardio{prestatienummer}")

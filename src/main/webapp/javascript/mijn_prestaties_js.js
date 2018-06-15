@@ -35,8 +35,8 @@ function showMijnCardioPrestaties(json){
  				cell2.innerHTML = datum;
  				cell3.innerHTML = sessieduur+afstand+snelheid;
  				cell4.innerHTML = wijzig+verwijder;
- 				
- 				document.querySelector("#verwijder").addEventListener("click",function(){verijderCardioPrestatie(value.prestatienummer)});
+ 				document.querySelector("#verwijder").addEventListener("click",function(){verijderCardioPrestatie(value.prestatienummer); mijnUsername("cardio");});
+ 				document.querySelector("#wijzig").addEventListener("click",function(){wijzigCardioFunc(value.prestatienummer)});
 				
 			}
 	});
@@ -75,12 +75,81 @@ function showMijnGewichtPrestaties(json){
  				cell3.innerHTML = volume+sets+reps;
  				cell4.innerHTML = wijzig+verwijder;
  				
- 				document.querySelector("#verwijder").addEventListener("click",function(){verijderGewichtPrestatie(value.prestatienummer)});
+ 				document.querySelector("#verwijder").addEventListener("click",function(){verijderGewichtPrestatie(value.prestatienummer); mijnUsername("gewicht");});
+ 				document.querySelector("#wijzig").addEventListener("click",function(){wijzigGewichtFunc(value.prestatienummer)});
  				console.log(value.prestatienummer);
 			}
 	});
 }
 
+function wijzigGewichtFunc(prestatienummer){
+		modal.style.display = "block";
+		fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eengewicht" + prestatienummer)
+		.then(response => response.json())
+		.then(function(myJson){
+			document.getElementById("wijzigGegevens").innerHTML = '<input type="number" name="gewichtprestatienummer" id="gewichtprestatienummer" value="'+myJson.prestatienummer+'"style="display: none;">';
+			document.getElementById("wijzigGegevens").innerHTML += '<input name="reps" type="number" value="'+ myJson.reps +  '">Reps<br><br>';
+			document.getElementById("wijzigGegevens").innerHTML += '<input name="volume" type="number" value="'+ myJson.volume +  '">Volume<br><br>';
+			document.getElementById("wijzigGegevens").innerHTML += '<input name="sets" type="number" value="'+ myJson.sets +  '">Sets<br><br>';
+			document.getElementById("wijzigGegevens").innerHTML += '<input id="put" type="button" value="Verzend"><br><br>';
+			document.querySelector("#put").addEventListener("click", putGewichtHandler);
+		});
+	}
+
+function wijzigCardioFunc(prestatienummer){
+	modal.style.display = "block";
+	fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eencardio" + prestatienummer)
+	.then(response => response.json())
+	.then(function(myJson){
+		document.getElementById("wijzigGegevens").innerHTML = '<input type="number" name="cardioprestatienummer" id="cardioprestatienummer" value="'+myJson.prestatienummer+'"style="display: none;">';
+		document.getElementById("wijzigGegevens").innerHTML += '<input name="afstand" type="number" value="'+ myJson.afstand +  '">Afstand<br><br>';
+		document.getElementById("wijzigGegevens").innerHTML += '<input name="sessieduur" type="number" value="'+ myJson.sessieduur +  '">Sessieduur<br><br>';
+		document.getElementById("wijzigGegevens").innerHTML += '<input name="snelheid" type="number" value="'+ myJson.snelheid +  '">Snelheid<br><br>';
+		document.getElementById("wijzigGegevens").innerHTML += '<input id="put" type="button" value="Verzend"><br><br>';
+		document.querySelector("#put").addEventListener("click", putCardioHandler);
+	});
+}
+
+var putGewichtHandler = function() {
+		var id = document.getElementById("gewichtprestatienummer").value;
+	    var formData = new FormData(document.querySelector("#wijzigGegevens"));
+	    var encData = new URLSearchParams(formData.entries());
+
+	    fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eengewicht" + id, { method: 'PUT' , body: encData} )
+	    .then(response => Promise.all([response.status, response.json()]))
+	 	  
+	 	  .then(function([status, myJson]) {
+	 		 mijnUsername("gewicht");
+	 	    if (status == 200)
+	 	      console.log(myJson.resultaat);
+	 	    else {
+	 	      console.log(myJson.error);
+	 	    } 
+	 	  })
+
+	 	  .catch(error => console.log(error.message));
+	 	};
+	 	
+	 	var putCardioHandler = function() {
+			var id = document.getElementById("cardioprestatienummer").value;
+		    var formData = new FormData(document.querySelector("#wijzigGegevens"));
+		    var encData = new URLSearchParams(formData.entries());
+
+		    fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eencardio" + id, { method: 'PUT' , body: encData} )
+		    .then(response => Promise.all([response.status, response.json()]))
+		 	  
+		 	  .then(function([status, myJson]) {
+		 	    if (status == 200)
+		 	      console.log(myJson.resultaat);
+		 	    else {
+		 	      console.log(myJson.error);
+		 	    }
+		 	   mijnUsername("cardio");
+		 	  })
+
+		 	  .catch(error => console.log(error.message));
+		 	};
+	 	
 function verijderGewichtPrestatie(prestatienummer){
 	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/gewicht' + prestatienummer,{method: 'DELETE'})
 	.then(function(response){
@@ -129,3 +198,24 @@ function initPage(){
 }
 
 window.onload=initPage();
+
+//Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }}
