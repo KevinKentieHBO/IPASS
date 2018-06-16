@@ -31,7 +31,7 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
 	var afbeeldingveld = '<img id="oefeningfoto" name="oefeningfoto" src="afbeeldingen/oefeningen/'+afbeelding+'"><br>';
 	var typeveld ='<p name="oefeningtype" id ="oefeningtype""> <b>type:</b> '+oefeningtype+'</p><br>';
 	var setsveld = '<input type="number" id="sets" name="sets" placeholder="Sets">';
-	var repsveld = '<input type="number" id="reps" name = "reps" placeholder="Reps">';
+	var repsveld = '<input type="number" id="reps" name = "reps"  placeholder="Reps">';
 	var volumeveld = '<input type="number" id="volume" name="volume" placeholder="Volume">';
 	
 	var sessieduurveld = '<input type="number" name="sessieduur" id="sessieduur" placeholder="Sessieduur">';
@@ -42,8 +42,9 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
 	var submitknop = '<br><button type="button" id="submit">Invullen</button>';
 	
  	if(oefeningtype =='cardio'){
- 		document.getElementById("prestatie").innerHTML = '<form id="CardioForm">'+naamveld + afbeeldingveld + typeveld + sessieduurveld + afstandveld + oefeningveld + snelheidveld+submitknop+username+'</form>';
+ 		document.getElementById("prestatie").innerHTML = '<form id="CardioForm" name="Form">'+naamveld + afbeeldingveld + typeveld + sessieduurveld + afstandveld + oefeningveld + snelheidveld+submitknop+username+'</form>';
  		document.querySelector("#submit").addEventListener("click",function(){
+ 			if(validateCardioForm()){
  			var formData = new FormData(document.querySelector("#CardioForm"));
  		    var encData = new URLSearchParams(formData.entries());
  		    
@@ -53,10 +54,12 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  		  document.getElementById('sessieduur').value = '';
  		  document.getElementById('afstand').value = '';
  		  document.getElementById('snelheid').value = '';
-		});
+ 			}});
  	}else{
- 		document.getElementById("prestatie").innerHTML = '<form id="GewichtForm">'+naamveld + afbeeldingveld + typeveld + volumeveld + setsveld + oefeningveld + repsveld+submitknop+username+'</form>';
+ 		
+ 		document.getElementById("prestatie").innerHTML = '<form id="GewichtForm" name="Form">'+naamveld + afbeeldingveld + typeveld + volumeveld + setsveld + oefeningveld + repsveld+submitknop+username+'</form>';
  		document.querySelector("#submit").addEventListener("click",function(){
+ 			if(validateGewichtForm()){
  			var formData = new FormData(document.querySelector("#GewichtForm"));
  		    var encData = new URLSearchParams(formData.entries());
  		    
@@ -66,12 +69,40 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  		  document.getElementById('volume').value = '';
   		  document.getElementById('sets').value = '';
   		  document.getElementById('reps').value = '';
-		});
+ 			}});
  	}
 }
 
 function initPage(){
 		showOefeningen();
 	}
-	
+
+function validateCardioForm()
+{
+    var a=document.forms["Form"]["sessieduur"].value;
+    var b=document.forms["Form"]["afstand"].value;
+    var c=document.forms["Form"]["snelheid"].value;
+    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
+    {
+        alert("Vul alle velden in!");
+        return false;
+    } else{
+    	return true;
+    }
+}
+
+function validateGewichtForm()
+{
+    var a=document.forms["Form"]["sets"].value;
+    var b=document.forms["Form"]["reps"].value;
+    var c=document.forms["Form"]["volume"].value;
+    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
+    {
+        alert("Vul alle velden in!");
+        return false;
+    } else{
+    	return true;
+    }
+}
+
 window.onload=initPage();

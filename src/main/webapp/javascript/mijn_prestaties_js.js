@@ -111,6 +111,7 @@ function wijzigCardioFunc(prestatienummer){
 }
 
 var putGewichtHandler = function() {
+		if(validateGewichtForm()){
 		var id = document.getElementById("gewichtprestatienummer").value;
 	    var formData = new FormData(document.querySelector("#wijzigGegevens"));
 	    var encData = new URLSearchParams(formData.entries());
@@ -128,9 +129,10 @@ var putGewichtHandler = function() {
 	 	  })
 
 	 	  .catch(error => console.log(error.message));
-	 	};
+		}};
 	 	
 	 	var putCardioHandler = function() {
+	 		if(validateCardioForm()){
 			var id = document.getElementById("cardioprestatienummer").value;
 		    var formData = new FormData(document.querySelector("#wijzigGegevens"));
 		    var encData = new URLSearchParams(formData.entries());
@@ -148,7 +150,7 @@ var putGewichtHandler = function() {
 		 	  })
 
 		 	  .catch(error => console.log(error.message));
-		 	};
+	 		}};
 	 	
 function verijderGewichtPrestatie(prestatienummer){
 	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/gewicht' + prestatienummer,{method: 'DELETE'})
@@ -191,6 +193,34 @@ function mijnUsername(type){
 		}else{
 			showMijnGewichtPrestaties(myJson);}
 		});
+}
+
+function validateGewichtForm()
+{
+    var a=document.forms["Form"]["sets"].value;
+    var b=document.forms["Form"]["reps"].value;
+    var c=document.forms["Form"]["volume"].value;
+    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
+    {
+        alert("Vul alle velden in!");
+        return false;
+    } else{
+    	return true;
+    }
+}
+
+function validateCardioForm()
+{
+    var a=document.forms["Form"]["sessieduur"].value;
+    var b=document.forms["Form"]["afstand"].value;
+    var c=document.forms["Form"]["snelheid"].value;
+    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
+    {
+        alert("Vul alle velden in!");
+        return false;
+    } else{
+    	return true;
+    }
 }
 
 
