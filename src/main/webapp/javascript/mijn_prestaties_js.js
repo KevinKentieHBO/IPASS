@@ -4,7 +4,7 @@ document.querySelector("#bekijkGewicht").addEventListener("click",function(){mij
 function showMijnCardioPrestaties(json){
 	var id = json.sportersnummer;
 
-	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/cardio' + id)
+	fetch('restservices/prestatie/cardio' + id)
 	.then(function(response){
 		return response.json();
 	})
@@ -45,7 +45,7 @@ function showMijnCardioPrestaties(json){
 function showMijnGewichtPrestaties(json){
 	var id = json.sportersnummer;
 	
-	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/gewicht' + id,{method: 'GET'})
+	fetch('restservices/prestatie/gewicht' + id,{method: 'GET'})
 	.then(function(response){
 		return response.json();
 	})
@@ -84,7 +84,7 @@ function showMijnGewichtPrestaties(json){
 
 function wijzigGewichtFunc(prestatienummer){
 		modal.style.display = "block";
-		fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eengewicht" + prestatienummer)
+		fetch("restservices/prestatie/eengewicht" + prestatienummer)
 		.then(response => response.json())
 		.then(function(myJson){
 			document.getElementById("wijzigGegevens").innerHTML = '<input type="number" name="gewichtprestatienummer" id="gewichtprestatienummer" value="'+myJson.prestatienummer+'"style="display: none;">';
@@ -98,7 +98,7 @@ function wijzigGewichtFunc(prestatienummer){
 
 function wijzigCardioFunc(prestatienummer){
 	modal.style.display = "block";
-	fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eencardio" + prestatienummer)
+	fetch("restservices/prestatie/eencardio" + prestatienummer)
 	.then(response => response.json())
 	.then(function(myJson){
 		document.getElementById("wijzigGegevens").innerHTML = '<input type="number" name="cardioprestatienummer" id="cardioprestatienummer" value="'+myJson.prestatienummer+'"style="display: none;">';
@@ -116,7 +116,7 @@ var putGewichtHandler = function() {
 	    var formData = new FormData(document.querySelector("#wijzigGegevens"));
 	    var encData = new URLSearchParams(formData.entries());
 
-	    fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eengewicht" + id, { method: 'PUT' , body: encData} )
+	    fetch("restservices/prestatie/eengewicht" + id, { method: 'PUT' , body: encData} )
 	    .then(response => Promise.all([response.status, response.json()]))
 	 	  
 	 	  .then(function([status, myJson]) {
@@ -137,7 +137,7 @@ var putGewichtHandler = function() {
 		    var formData = new FormData(document.querySelector("#wijzigGegevens"));
 		    var encData = new URLSearchParams(formData.entries());
 
-		    fetch("http://localhost:8081/prestatiesysteem/restservices/prestatie/eencardio" + id, { method: 'PUT' , body: encData} )
+		    fetch("restservices/prestatie/eencardio" + id, { method: 'PUT' , body: encData} )
 		    .then(response => Promise.all([response.status, response.json()]))
 		 	  
 		 	  .then(function([status, myJson]) {
@@ -153,7 +153,7 @@ var putGewichtHandler = function() {
 	 		}};
 	 	
 function verijderGewichtPrestatie(prestatienummer){
-	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/gewicht' + prestatienummer,{method: 'DELETE'})
+	fetch('restservices/prestatie/gewicht' + prestatienummer,{method: 'DELETE'})
 	.then(function(response){
 		return response.json();
 	})
@@ -163,7 +163,7 @@ function verijderGewichtPrestatie(prestatienummer){
 }
 
 function verijderCardioPrestatie(prestatienummer){
-	fetch('http://localhost:8081/prestatiesysteem/restservices/prestatie/cardio' + prestatienummer,{method: 'DELETE'})
+	fetch('restservices/prestatie/cardio' + prestatienummer,{method: 'DELETE'})
 	.then(function(response){
 		return response.json();
 	})
@@ -183,7 +183,7 @@ function mijnUsername(type){
 	var jwtun = parseJwt(jwt);
 	var username = jwtun.sub;
 
-	fetch('http://localhost:8081/prestatiesysteem/restservices/sporter/' + username)
+	fetch('restservices/sporter/' + username)
 	.then(function(response){
 		return response.json();
 	})

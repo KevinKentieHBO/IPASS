@@ -1,0 +1,7 @@
+<Context>
+ <Resource name="jdbc/PostgresDS"
+ url="${DB_URL}"
+ driverClassName="org.postgresql.Driver"
+ auth="Container"
+ type="javax.sql.DataSource" />
+</Context>

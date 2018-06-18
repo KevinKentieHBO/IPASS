@@ -1,5 +1,5 @@
 function showOefeningen(){
-	 		fetch('http://localhost:8081/prestatiesysteem/restservices/oefening')
+	 		fetch('restservices/oefening')
 	 		.then(function(response){
 	 			return response.json();
 	 		})
@@ -48,7 +48,7 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  			var formData = new FormData(document.querySelector("#CardioForm"));
  		    var encData = new URLSearchParams(formData.entries());
  		    
- 		    fetch('http://localhost:8081/prestatiesysteem/restservices/oefening/cardiooefening', { method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' +  window.sessionStorage.getItem("myJWT")} })
+ 		    fetch('restservices/oefening/cardiooefening', { method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' +  window.sessionStorage.getItem("myJWT")} })
  		    	.then(response => response.json())
  		    	.then(function (myJson) { console.log(myJson); });
  		  document.getElementById('sessieduur').value = '';
@@ -63,7 +63,7 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  			var formData = new FormData(document.querySelector("#GewichtForm"));
  		    var encData = new URLSearchParams(formData.entries());
  		    
- 		    fetch('http://localhost:8081/prestatiesysteem/restservices/oefening/gewichtoefening', { method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' +  window.sessionStorage.getItem("myJWT")} })
+ 		    fetch('restservices/oefening/gewichtoefening', { method: 'POST', body: encData, headers:{'Authorization': 'Bearer ' +  window.sessionStorage.getItem("myJWT")} })
  		    	.then(response => response.json())
  		    	.then(function (myJson) { console.log(myJson); });
  		  document.getElementById('volume').value = '';

@@ -6,7 +6,7 @@ document.querySelector("#login").addEventListener("click", login);
 
 		fetch("restservices/authentication", { method: 'POST', body: encData })
 	    .then(function(response) {
-	    	if (response.ok) {window.location.href = "http://localhost:8081/prestatiesysteem/homepagina.html";
+	    	if (response.ok) {window.location.href = "homepagina.html";
 	    		return response.json();}
 	    	else{ throw "Wrong username/password";}
 	    	})
