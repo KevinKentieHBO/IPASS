@@ -3,6 +3,7 @@ document.querySelector("#repmax").addEventListener("click",function(){mijnUserna
 
 function showCalorie(json){	
 		document.querySelector("#calculatorlijst").innerHTML="<button id='calorieverbranding'>Bereken BMR</button><button id='repmax'>Bereken 1 rep max</button>";
+		document.querySelector("#calculatorlijst").innerHTML+='<br><h1>Wat is je BMR (Basal Metabolic Rate)?</h1><br><p>De BMR is de standaard meting van het metabolisme. Dit is het aantal calorieen dat je lichaam nodig heeft om je lichaam werkend te houden. Het aantal calorieen is dan gelijk aan het verbruik van het lichaam in rust. Het gaat hier alleen om de werking van het lichaam zoals ademhalen, verteren en het regelen van de hartslag. De BMR verschilt per persoon. Iedereen heeft een ander metabolisme. Het metabolisme bepaalt voor een groot deel hoeveel iemand aankomt of afvalt. Een sneller metabolisme zorgt ervoor dat je makkelijker afvalt. Een langzaam metabolisme zorgt ervoor dat je makkelijker aankomt. </p>'
 		var geslacht = "<br><br><input type='radio' id='man' name='gender' value='man'> Man <input type='radio' name= gender' value='vrouw'> Vrouw<br>";
 		var leeftijd = "<input type='number' id='leeftijd' name='leeftijd' placeholder='Leeftijd'><br>";
 		var lengte = "<input type='number' id='lengte' name='lengte' placeholder='Lengte in cm'><br>";
@@ -15,6 +16,7 @@ function showCalorie(json){
 			var g = parseInt(json.gewicht);
 			var l = parseInt(document.querySelector("#leeftijd").value);
 			var leng = parseInt(document.querySelector("#lengte").value);
+			if(document.querySelector("#leeftijd").value==null || document.querySelector("#leeftijd").value==""|| document.querySelector("#lengte").value==null || document.querySelector("#lengte").value==""){alert("Vul alle velden in!");}else{
 			document.querySelector("#bereken").parentNode.removeChild(document.querySelector("#bereken"));
 			if ((document.getElementById('man').checked)){
 				console.log(g);
@@ -27,11 +29,12 @@ function showCalorie(json){
 			}
 			document.querySelector("#calorieverbranding").addEventListener("click",function(){mijnUsername("calorie");});
 			document.querySelector("#repmax").addEventListener("click",function(){mijnUsername("repmax");});
-		});
+			}});
 	}
 
 function showRepMax(json){
 	document.querySelector("#calculatorlijst").innerHTML="<button id='calorieverbranding'>Bereken BMR</button><button id='repmax'>Bereken 1 rep max</button>";
+	document.querySelector("#calculatorlijst").innerHTML+='<br><h1>Wat is One rep max?</h1><br><p>One rep maximum (1RM) bij krachttraining, betekend de maximale hoeveelheid gewicht dat men kan tillen, met een herhaling voor een bepaalde oefening. De One Repetition Maximum wordt dan gebruikt, om te bepalen wat de maximale sterkte van een individu is en de methode voor het bepalen van de winnaar aan evenementen, zoals powerlifting en gewichtheffen wedstrijden. One repetition maximum kan ook gebruikt worden, als bovengrens om de gewenste load (als een percentage van de 1RM) voor een oefening te kunnen bepalen.</p>'
 	var gewicht = "<br><br><input type='number' id='gewicht' name='gewicht' placeholder='Getilde gewicht in kg'><br>";
 	var reps = "<input type='number' id='reps' name='reps' placeholder='Reps'><br>";
 	var bereken = "<button type='button' id='bereken' name='bereken'>Bereken</button>";
@@ -39,12 +42,15 @@ function showRepMax(json){
 	document.querySelector("#calorieverbranding").addEventListener("click",function(){mijnUsername("calorie");});
 	document.querySelector("#repmax").addEventListener("click",function(){mijnUsername("repmax");});
 	document.querySelector("#bereken").addEventListener("click",function(){
+		a = document.querySelector("#gewicht").value;
+		b = document.querySelector("#reps").value;
+		if(a==null || a=="" || b==null || b==""){alert("Vul alle velden in!");}else{
 		onerep = (parseInt(document.querySelector("#gewicht").value) * parseInt(document.querySelector("#reps").value) * 1/30)+parseInt(document.querySelector("#gewicht").value);
 		document.querySelector("#bereken").parentNode.removeChild(document.querySelector("#bereken"));
 		document.querySelector("#calculatorlijst").innerHTML += "<br><p>Uw One Rep Max is: "+onerep+"</p><br>";
 		document.querySelector("#calorieverbranding").addEventListener("click",function(){mijnUsername("calorie");});
 		document.querySelector("#repmax").addEventListener("click",function(){mijnUsername("repmax");});
-	});
+		}});
 }
 
 
@@ -70,34 +76,6 @@ function mijnUsername(type){
 		}else{
 			showCalorie(myJson);}
 		});
-}
-
-function validateGewichtForm()
-{
-    var a=document.forms["Form"]["sets"].value;
-    var b=document.forms["Form"]["reps"].value;
-    var c=document.forms["Form"]["volume"].value;
-    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
-    {
-        alert("Vul alle velden in!");
-        return false;
-    } else{
-    	return true;
-    }
-}
-
-function validateCardioForm()
-{
-    var a=document.forms["Form"]["sessieduur"].value;
-    var b=document.forms["Form"]["afstand"].value;
-    var c=document.forms["Form"]["snelheid"].value;
-    if (a==null || a=="" || b==null || b=="" || c==null || c=="")
-    {
-        alert("Vul alle velden in!");
-        return false;
-    } else{
-    	return true;
-    }
 }
 
 function Uitloggen(){
