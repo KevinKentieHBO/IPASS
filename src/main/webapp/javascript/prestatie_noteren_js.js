@@ -73,6 +73,11 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  	}
 }
 
+function Uitloggen(){
+	sessionStorage.removeItem('myJWT');
+	window.location.href = "index.html";
+}
+
 function initPage(){
 		showOefeningen();
 	}

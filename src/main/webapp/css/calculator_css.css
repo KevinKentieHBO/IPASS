@@ -1,0 +1,27 @@
+#frame {
+		display: grid;
+		grid-template-columns: 0.8fr 2fr 0.8fr;
+		grid-template-rows: 1fr 10fr 1fr; 
+	}
+	
+#calculatorlijst{
+	grid-column:2/4;
+	grid-row:2;
+	margin-left:20px;
+	margin-right:20px;
+	margin-top: 5px;
+}
+
+
+button{
+	background-color: white; 
+    color: black; 
+    border: 2px solid #4652a0;
+    font-size: 20px;
+    margin:4px;
+}
+
+button:hover {
+    background-color: #4652a0;
+    color: white;
+}

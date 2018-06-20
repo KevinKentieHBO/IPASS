@@ -3,7 +3,7 @@
 <head>
  <title>Homepagina</title>
  <link rel="stylesheet" type="text/css" href="css/statisch.css">
- <link rel="stylesheet" type="text/css" href="css/homepage.css">
+ <link rel="stylesheet" type="text/css" href="css/calculator_css.css">
 </head>
 <body>
 <div id='frame'>
@@ -22,26 +22,17 @@
 </ul>
  </div>
  
- <div id='info'>
- <h1>Welkom</h1>
- <p>Op dit platform is het mogelijk om je sportprestaties bij te houden.
- Onderzoek laat zien dat 60% van de sporters die hun prestaties bijhouden gemotiveerder zijn dan sporters die dat niet doen.</p>
+ <div id='calculatorlijst'>
+ 	<button id='calorieverbranding'>Bereken BMR</button>
+ 	<button id='repmax'>Bereken 1 rep max</button>
+ 	<div id='resultaat'></div>
  </div>
  
- <div id='onderbalk'>
- </div>
- 
- <div id='foto'>
- <img id='foto1'src="afbeeldingen/homepaginafoto1.jpg">
+ <div id='onderbalk' class="footer">
  </div>
  
  </div>
  
- <script>
- function Uitloggen(){
-		sessionStorage.removeItem('myJWT');
-		window.location.href = "index.html"
-	}
- </script>
+<script src="javascript/calculator_js.js"></script>
  </body>
 </html>

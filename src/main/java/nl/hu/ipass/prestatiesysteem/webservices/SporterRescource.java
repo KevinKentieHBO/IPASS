@@ -38,6 +38,8 @@ SporterService service = ServiceProvider.getSporterService();
 		Sporter s =  service.getSporter(username);
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("sportersnummer", s.getSportersnummer());
+		job.add("gewicht", s.getGewicht());
+		
 		JsonObject jsobject = job.build();
 		return jsobject.toString();
 	}

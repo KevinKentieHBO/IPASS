@@ -223,6 +223,11 @@ function validateCardioForm()
     }
 }
 
+function Uitloggen(){
+	sessionStorage.removeItem('myJWT');
+	window.location.href = "index.html";
+}
+
 
 function initPage(){
 }
