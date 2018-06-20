@@ -38,16 +38,15 @@ public class SporterDaoPostgresImpl extends PostgresBaseDao implements SporterDa
 	public boolean save(Sporter sporter) {
 		boolean resultaat = false;
 		try(Connection con = super.getConnection()){
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sporter VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			pstmt.setInt(1, sporter.getSportersnummer());
-			pstmt.setString(2, sporter.getVoornaam());
-			pstmt.setString(3, sporter.getTussenvoegsel());
-			pstmt.setString(4, sporter.getAchternaam());
-			pstmt.setString(5, sporter.getE_mail());
-			pstmt.setString(6, sporter.getWachtwoord());
-			pstmt.setInt(7, sporter.getTelefoonnummer());
-			pstmt.setString(8, sporter.getGeboortedatum());
-			pstmt.setInt(9, sporter.getGewicht());
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO sporter VALUES (nextval('sportersq'), ?, ?, ?, ?, ?, ?, ?, ?,'user')");
+			pstmt.setString(1, sporter.getVoornaam());
+			pstmt.setString(2, sporter.getTussenvoegsel());
+			pstmt.setString(3, sporter.getAchternaam());
+			pstmt.setString(4, sporter.getE_mail());
+			pstmt.setString(5, sporter.getWachtwoord());
+			pstmt.setInt(6, sporter.getTelefoonnummer());
+			pstmt.setString(7, sporter.getGeboortedatum());
+			pstmt.setInt(8, sporter.getGewicht());
 			int result = pstmt.executeUpdate();
 			if (result != 0) {
 				resultaat = true;

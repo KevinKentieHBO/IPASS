@@ -24,6 +24,19 @@ public class Sporter {
 		this.geboortedatum = geboortedatum;
 		this.gewicht = gewicht;
 	}
+	
+	public Sporter(String voornaam, String tussenvoegsel, String achternaam, String e_mail,
+			String wachtwoord, int telefoonnummer, String geboortedatum, int gewicht) {
+		super();
+		this.voornaam = voornaam;
+		this.tussenvoegsel = tussenvoegsel;
+		this.achternaam = achternaam;
+		this.e_mail = e_mail;
+		this.wachtwoord = wachtwoord;
+		this.telefoonnummer = telefoonnummer;
+		this.geboortedatum = geboortedatum;
+		this.gewicht = gewicht;
+	}
 
 	public int getSportersnummer() {
 		return sportersnummer;

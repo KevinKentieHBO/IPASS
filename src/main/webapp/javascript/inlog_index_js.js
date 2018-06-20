@@ -1,4 +1,5 @@
 document.querySelector("#login").addEventListener("click", login);
+document.querySelector("#registreren").addEventListener("click", registreren);
  
  function login(event) {
 		var formData = new FormData(document.querySelector("#loginform"));
@@ -13,3 +14,7 @@ document.querySelector("#login").addEventListener("click", login);
 	    	.then(myJson => window.sessionStorage.setItem("myJWT", myJson.JWT))
 	    	.catch(error => console.log(error));
 	}
+ 
+ function registreren(){
+	 window.location.href = "registreren.html";
+ }

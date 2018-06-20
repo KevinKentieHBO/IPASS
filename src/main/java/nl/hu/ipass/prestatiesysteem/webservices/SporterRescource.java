@@ -27,8 +27,29 @@ import nl.hu.ipass.prestatiesysteem.persistentie.services.SporterService;
 
 @Path("/sporter")
 public class SporterRescource {
-SporterService service = ServiceProvider.getSporterService();
-	
+	SporterService service = ServiceProvider.getSporterService();
+
+	@POST
+	@Produces("application/json")
+	public Response addSporter(
+			@FormParam("voornaam") String voornaam,
+			@FormParam("tussenvoegsel") String tussenvoegsel,
+			@FormParam("achternaam") String achternaam,
+			@FormParam("email") String email,
+			@FormParam("wachtwoord") String wachtwoord,
+			@FormParam("telefoonnummer") int telefoonnummer,
+			@FormParam("geboortedatum") String geboortedatum,
+			@FormParam("gewicht") int gewicht) throws SQLException {
+			boolean s1 = service.voegSporterToe(voornaam, tussenvoegsel, achternaam, email, wachtwoord, telefoonnummer, geboortedatum, gewicht);
+			if (voornaam == null) {
+				System.out.println("help");
+				Map<String, String> messages = new HashMap<String, String>();
+				messages.put("error", "sporter does not exist!");
+				return Response.status(409).entity(messages).build();
+			}
+			return Response.ok().build();
+		}
+
 	@GET
 	@Path("{username}")
 	@Produces("application/json")
@@ -39,7 +60,7 @@ SporterService service = ServiceProvider.getSporterService();
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("sportersnummer", s.getSportersnummer());
 		job.add("gewicht", s.getGewicht());
-		
+
 		JsonObject jsobject = job.build();
 		return jsobject.toString();
 	}

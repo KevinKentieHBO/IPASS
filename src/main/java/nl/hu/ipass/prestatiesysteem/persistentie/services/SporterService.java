@@ -21,5 +21,10 @@ public class SporterService {
 	public Sporter getSporter(String username){
 		return Sporterdao.findByUsername(username);
 	}
+	
+	public boolean voegSporterToe(String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord, int telefoonnummer, String geboortedatum, int gewicht) {
+		Sporter s = new Sporter(voornaam, tussenvoegsel, achternaam, email, wachtwoord, telefoonnummer, geboortedatum, gewicht);
+		return Sporterdao.save(s);
+	}
 
 }
