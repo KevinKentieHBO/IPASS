@@ -1,5 +1,7 @@
 document.querySelector("#registreer").addEventListener("click",function(){registreer()});
 document.querySelector("#back").addEventListener("click",function(){window.location.href = "index.html";});
+
+//stuurt de ingevulde informatie naar de back-end en voegt een sporter toe
 function registreer(){
 	if (validateForm()){
 			var formData = new FormData(document.querySelector("#registratieform"));
@@ -11,6 +13,7 @@ function registreer(){
 	}
  }
 
+//kijkt of de velden niet leeg zijn
 function validateForm()
 {
     var a=document.forms["registratieform"]["voornaam"].value;

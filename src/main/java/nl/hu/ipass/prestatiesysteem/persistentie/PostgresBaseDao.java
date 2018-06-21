@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class PostgresBaseDao {
+  //Deze klas is voor het verbinding maken met de postgres database
   protected final Connection getConnection() {
     Connection result = null;
 

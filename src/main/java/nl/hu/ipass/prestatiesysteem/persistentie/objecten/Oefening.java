@@ -9,6 +9,7 @@ public class Oefening {
 	private int calorieverbranding;
 	private String afbeelding;
 	
+	//constructor voor het maken van een Oefening object vanuit de database
 	public Oefening(int oefeningnummer, String oefeningnaam, String oefeningtype, int intensiteit,
 			int calorieverbranding, String afbeelding) {
 		super();
@@ -19,7 +20,8 @@ public class Oefening {
 		this.calorieverbranding = calorieverbranding;
 		this.afbeelding = afbeelding;
 	}
-
+	
+	//hieronder zijn alle getters en setters te vinden
 	public int getOefeningnummer() {
 		return oefeningnummer;
 	}

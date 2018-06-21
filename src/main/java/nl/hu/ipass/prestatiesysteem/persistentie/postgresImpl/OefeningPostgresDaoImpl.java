@@ -13,6 +13,7 @@ import nl.hu.ipass.prestatiesysteem.persistentie.objecten.Oefening;
 
 public class OefeningPostgresDaoImpl  extends PostgresBaseDao implements OefeningDao {
 	
+	//deze methode geeft een lijst van alle oefeningen die in de database zijn te vinden
 	@Override
 	public List<Oefening> findAll() {
 		List<Oefening> results = new ArrayList<Oefening>();
@@ -33,6 +34,7 @@ public class OefeningPostgresDaoImpl  extends PostgresBaseDao implements Oefenin
 		return results;
 	}
 	
+	//Deze methode geeft een individuele oefening uit de database door hem te zoeken bij de oefeningnaam
 	public Oefening findByNaam(String naam) {
 		Oefening o = null;
 		try(Connection con = super.getConnection()){

@@ -28,7 +28,8 @@ import nl.hu.ipass.prestatiesysteem.persistentie.services.SporterService;
 @Path("/sporter")
 public class SporterRescource {
 	SporterService service = ServiceProvider.getSporterService();
-
+	
+	//Insert een sporter (gebruiker) in de database
 	@POST
 	@Produces("application/json")
 	public Response addSporter(
@@ -50,6 +51,7 @@ public class SporterRescource {
 			return Response.ok().build();
 		}
 
+	//geeft een sporter uit de database
 	@GET
 	@Path("{username}")
 	@Produces("application/json")

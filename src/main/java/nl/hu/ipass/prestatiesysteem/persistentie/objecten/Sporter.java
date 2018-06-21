@@ -11,6 +11,7 @@ public class Sporter {
 	private String geboortedatum;
 	private int gewicht;
 	
+	//Constructor voor het maken van een Sporter object vanuit de database
 	public Sporter(int sportersnummer, String voornaam, String tussenvoegsel, String achternaam, String e_mail,
 			String wachtwoord, int telefoonnummer, String geboortedatum, int gewicht) {
 		super();
@@ -25,6 +26,7 @@ public class Sporter {
 		this.gewicht = gewicht;
 	}
 	
+	//constructor voor de POST statement die naar de database gaat
 	public Sporter(String voornaam, String tussenvoegsel, String achternaam, String e_mail,
 			String wachtwoord, int telefoonnummer, String geboortedatum, int gewicht) {
 		super();
@@ -37,7 +39,8 @@ public class Sporter {
 		this.geboortedatum = geboortedatum;
 		this.gewicht = gewicht;
 	}
-
+	
+	//hieronder zijn alle getters en setters te vinden
 	public int getSportersnummer() {
 		return sportersnummer;
 	}

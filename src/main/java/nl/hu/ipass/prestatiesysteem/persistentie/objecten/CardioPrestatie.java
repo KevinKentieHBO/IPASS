@@ -9,6 +9,7 @@ public class CardioPrestatie {
 	private int afstand;
 	private int snelheid;
 	
+	//constructor voor het maken van een CardioPrestatie object vanuit de database
 	public CardioPrestatie(int prestatienummer, Sporter sporter, Oefening oefening, String datum, int sessieduur,
 			int afstand, int snelheid) {
 		super();
@@ -21,6 +22,7 @@ public class CardioPrestatie {
 		this.snelheid = snelheid;
 	}
 	
+	//constructor voor de POST statement richting de database
 	public CardioPrestatie(Sporter sporter, Oefening oefening, int sessieduur,
 			int afstand, int snelheid) {
 		super();
@@ -30,7 +32,8 @@ public class CardioPrestatie {
 		this.afstand = afstand;
 		this.snelheid = snelheid;
 	}
-
+	
+	//hieronder zijn alle getters en setters te vinden
 	public int getPrestatienummer() {
 		return prestatienummer;
 	}

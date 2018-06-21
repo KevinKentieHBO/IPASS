@@ -1,3 +1,4 @@
+//weergeeft een lijst met oefeningen en maakt elke oefening klikbaar
 function showOefeningen(){
 	 		fetch('restservices/oefening')
 	 		.then(function(response){
@@ -16,6 +17,7 @@ function showOefeningen(){
 	 		});
 	 	}
 
+//weergeeft een scherm om alle informatie in te vullen van de geselecteerde oefening
 function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calorie_verbranding,afbeelding){
 	function parseJwt (token) {
         var base64Url = token.split('.')[1];
@@ -73,6 +75,7 @@ function oefeningInvul(oefeningnummer,oefeningnaam,oefeningtype,intensiteit,calo
  	}
 }
 
+//functie voor het uitloggen
 function Uitloggen(){
 	sessionStorage.removeItem('myJWT');
 	window.location.href = "index.html";
@@ -82,6 +85,7 @@ function initPage(){
 		showOefeningen();
 	}
 
+//checkt of alle velden wel ingevult zijn in het Cardio formulier
 function validateCardioForm()
 {
     var a=document.forms["Form"]["sessieduur"].value;
@@ -96,6 +100,7 @@ function validateCardioForm()
     }
 }
 
+//checkt of alle velden wel ingevult zijn in het Gewicht formulier
 function validateGewichtForm()
 {
     var a=document.forms["Form"]["sets"].value;

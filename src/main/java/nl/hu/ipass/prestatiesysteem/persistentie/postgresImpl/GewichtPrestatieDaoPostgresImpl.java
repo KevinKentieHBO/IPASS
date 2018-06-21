@@ -15,6 +15,7 @@ import nl.hu.ipass.prestatiesysteem.persistentie.objecten.Sporter;
 
 public class GewichtPrestatieDaoPostgresImpl extends PostgresBaseDao implements GewichtPresatieDao {
 
+	//Deze methode insert een gewicht prestatie naar de database
 	@Override
 	public boolean save(GewichtPrestatie gewichtprestatie) {
 		boolean resultaat = false;
@@ -33,6 +34,7 @@ public class GewichtPrestatieDaoPostgresImpl extends PostgresBaseDao implements 
 		return resultaat;
 	}
 
+	//Deze methode zoekt alle gewichtprestaties van een sporter op via zijn sportersnummer
 	@Override
 	public List<GewichtPrestatie> findAllById(int sportersnummer) {
 		List<GewichtPrestatie> results = new ArrayList<GewichtPrestatie>();
@@ -71,6 +73,7 @@ public class GewichtPrestatieDaoPostgresImpl extends PostgresBaseDao implements 
 		return results;
 	}
 
+	//deze methode update de database wanneer er waardes van attributen veranderd moeten worden
 	@Override
 	public boolean update(GewichtPrestatie gewichtprestatie) {
 		boolean resultaat = false;
@@ -88,6 +91,7 @@ public class GewichtPrestatieDaoPostgresImpl extends PostgresBaseDao implements 
 		return resultaat;
 	}
 
+	//deze methode verwijderd een gewicht prestatie uit de database
 	@Override
 	public boolean delete(GewichtPrestatie gewichtprestatie) {
 		boolean resultaat = false;
@@ -102,6 +106,8 @@ public class GewichtPrestatieDaoPostgresImpl extends PostgresBaseDao implements 
 		return resultaat;
 	}
 	
+	//Deze methode zoekt een individuele gewicht prestatie op bij zijn prestatienummer, deze methode wordt onder andere
+	//gebruikt voor de update methode
 	@Override
 	public GewichtPrestatie findByNummer(int prestatienummer) {
 		GewichtPrestatie prestatie = null;

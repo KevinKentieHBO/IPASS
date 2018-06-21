@@ -5,6 +5,8 @@ public class ServiceProvider {
 	private static OefeningService oefeningService = new OefeningService();
 	private static SporterService sporterService = new SporterService();
 	
+	//klasse waar alle Serviceklassen worden doorgegeven.
+	
 	public static PrestatieService getPrestatieService() {
 		return prestatieService;
 	}

@@ -14,7 +14,8 @@ import nl.hu.ipass.prestatiesysteem.persistentie.objecten.Oefening;
 import nl.hu.ipass.prestatiesysteem.persistentie.objecten.Sporter;
 
 public class CardioPrestatieDaoPostgresImpl extends PostgresBaseDao implements CardioPresatieDao {
-
+	
+	//Deze methode insert een cardio prestatie naar de database
 	@Override
 	public boolean save(CardioPrestatie cardioprestatie) {
 		boolean resultaat = false;
@@ -32,7 +33,8 @@ public class CardioPrestatieDaoPostgresImpl extends PostgresBaseDao implements C
 		}catch(SQLException sqle) {sqle.printStackTrace();}
 		return resultaat;
 	}
-
+	
+	//Deze methode zoekt alle cardioprestaties van een sporter op via zijn sportersnummer
 	@Override
 	public List<CardioPrestatie> findAllById(int sportersnummer) {
 		List<CardioPrestatie> results = new ArrayList<CardioPrestatie>();
@@ -70,7 +72,8 @@ public class CardioPrestatieDaoPostgresImpl extends PostgresBaseDao implements C
 		}catch(SQLException sqle) {sqle.printStackTrace();}
 		return results;
 	}
-
+	
+	//deze methode update de database wanneer er waardes van attributen veranderd moeten worden
 	@Override
 	public boolean update(CardioPrestatie cardioprestatie) {
 		boolean resultaat = false;
@@ -87,7 +90,8 @@ public class CardioPrestatieDaoPostgresImpl extends PostgresBaseDao implements C
 		}catch(SQLException sqle) {sqle.printStackTrace();}
 		return resultaat;
 	}
-
+	
+	//deze methode verwijderd een cardioprestatie uit de database
 	@Override
 	public boolean delete(CardioPrestatie cardioprestatie) {
 		boolean resultaat = false;
@@ -102,6 +106,8 @@ public class CardioPrestatieDaoPostgresImpl extends PostgresBaseDao implements C
 		return resultaat;
 	}
 	
+	//Deze methode zoekt een individuele cardioprestatie op bij zijn prestatienummer, deze methode wordt onder andere
+	//gebruikt voor de update methode
 	@Override
 	public CardioPrestatie findByNummer(int prestatienummer) {
 		CardioPrestatie prestatie = null;

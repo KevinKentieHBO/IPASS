@@ -25,6 +25,7 @@ import nl.hu.ipass.prestatiesysteem.persistentie.services.ServiceProvider;
 public class OefeningResource {
 	OefeningService service = ServiceProvider.getOefeningService();
 	
+	//get methode zegt ervoor dat er een lijst met alle oefeningen uit de database opgehaald word
 	@GET
 	@Produces("application/json")
 	public String getOefening() {
@@ -45,6 +46,7 @@ public class OefeningResource {
 		return array.toString();
 	}
 	
+	//insert een cardio prestatie in de database
 	@POST
 	@Path("/cardiooefening")
 	@Produces("application/json")
@@ -70,6 +72,7 @@ public class OefeningResource {
 		return Response.status(409).entity(message).build();
 	}
 	
+	//intert een gewicht prestatie in de database
 	@POST
 	@Path("/gewichtoefening")
 	@Produces("application/json")

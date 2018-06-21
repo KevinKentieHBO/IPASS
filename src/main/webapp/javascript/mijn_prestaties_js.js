@@ -1,6 +1,9 @@
+//geeft een eventlistner aan de button "bekijkcardio" mee
 document.querySelector("#bekijkCardio").addEventListener("click",function(){mijnUsername("cardio");});
+//geeft een eventlistner aan de button "bekijkgewicht" mee
 document.querySelector("#bekijkGewicht").addEventListener("click",function(){mijnUsername("gewicht");});
 
+//laat alle cardioprestaties zien van de ingelogde gebruikter door de GET methode aan te roepen in de rescource klasse
 function showMijnCardioPrestaties(json){
 	var id = json.sportersnummer;
 
@@ -42,6 +45,7 @@ function showMijnCardioPrestaties(json){
 	});
 }
 
+//laat alle gewichtprestaties zien van de ingelogde gebruikter door de GET methode aan te roepen in de rescource klasse
 function showMijnGewichtPrestaties(json){
 	var id = json.sportersnummer;
 	
@@ -82,6 +86,7 @@ function showMijnGewichtPrestaties(json){
 	});
 }
 
+//Weergeeft het pop-up scherm om een gewichtprestatie te wijzigen
 function wijzigGewichtFunc(prestatienummer){
 		modal.style.display = "block";
 		fetch("restservices/prestatie/eengewicht" + prestatienummer)
@@ -96,6 +101,7 @@ function wijzigGewichtFunc(prestatienummer){
 		});
 	}
 
+//Weergeeft het pop-up scherm om een cardioprestatie te wijzigen
 function wijzigCardioFunc(prestatienummer){
 	modal.style.display = "block";
 	fetch("restservices/prestatie/eencardio" + prestatienummer)
@@ -110,6 +116,7 @@ function wijzigCardioFunc(prestatienummer){
 	});
 }
 
+//roept in de rescource klasse de PUT methode aan voor een gewicht prestatie
 var putGewichtHandler = function() {
 		if(validateGewichtForm()){
 		var id = document.getElementById("gewichtprestatienummer").value;
@@ -131,7 +138,8 @@ var putGewichtHandler = function() {
 	 	  .catch(error => console.log(error.message));
 		}};
 	 	
-	 	var putCardioHandler = function() {
+//roept in de rescource klasse de PUT methode aan voor een cardioprestatie
+var putCardioHandler = function() {
 	 		if(validateCardioForm()){
 			var id = document.getElementById("cardioprestatienummer").value;
 		    var formData = new FormData(document.querySelector("#wijzigGegevens"));
@@ -152,6 +160,7 @@ var putGewichtHandler = function() {
 		 	  .catch(error => console.log(error.message));
 	 		}};
 	 	
+//roept in de rescource klasse de delete methode aan voor een gewichtprestatie
 function verijderGewichtPrestatie(prestatienummer){
 	fetch('restservices/prestatie/gewicht' + prestatienummer,{method: 'DELETE'})
 	.then(function(response){
@@ -162,6 +171,7 @@ function verijderGewichtPrestatie(prestatienummer){
 	});
 }
 
+//roept in de rescource klasse de delete methode aan voor een carioprestatie
 function verijderCardioPrestatie(prestatienummer){
 	fetch('restservices/prestatie/cardio' + prestatienummer,{method: 'DELETE'})
 	.then(function(response){
@@ -172,6 +182,10 @@ function verijderCardioPrestatie(prestatienummer){
 	});
 }
 
+//De username van de ingelogde gebruiker wordt opgezocht en er wordt gekeken op welke knop er geklikt is
+//doormiddel van het type. als het type cardio als waarde heeft dan wordt de methode ShowMijnCardioPrestaties uitgevoerd
+//is dit niet het geval dan wordt de methode ShowMijnGewichtPrestaties uitgevoerd. met beide methodes word een JSON waarin informatie
+//van de ingelogde sporter te vinden is
 function mijnUsername(type){
 	function parseJwt (token) {
 		var base64Url = token.split('.')[1];
@@ -195,6 +209,7 @@ function mijnUsername(type){
 		});
 }
 
+//checkt of alle velden wel ingevult zijn in het Gewicht formulier
 function validateGewichtForm()
 {
     var a=document.forms["Form"]["sets"].value;
@@ -209,6 +224,7 @@ function validateGewichtForm()
     }
 }
 
+//checkt of alle velden wel ingevult zijn in het Cardio formulier
 function validateCardioForm()
 {
     var a=document.forms["Form"]["sessieduur"].value;
@@ -223,6 +239,7 @@ function validateCardioForm()
     }
 }
 
+//functie voor het uitloggen
 function Uitloggen(){
 	sessionStorage.removeItem('myJWT');
 	window.location.href = "index.html";

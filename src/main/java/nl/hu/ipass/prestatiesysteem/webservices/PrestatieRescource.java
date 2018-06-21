@@ -26,6 +26,7 @@ import nl.hu.ipass.prestatiesysteem.persistentie.services.ServiceProvider;
 public class PrestatieRescource {
 	PrestatieService service = ServiceProvider.getPrestatieService();
 	
+	//haalt een lijst met cardioprestatie van een sporter op uit de database door zijn sportnummer
 	@GET
 	@Path("/cardio{sportnummer}")
 	@Produces("application/json")
@@ -49,6 +50,7 @@ public class PrestatieRescource {
 		return array.toString();
 	}
 	
+	//haalt een lijst met gewichtprestatie van een sporter op uit de database door zijn sportnummer
 	@GET
 	@Path("/gewicht{sportnummer}")
 	@Produces("application/json")
@@ -72,6 +74,7 @@ public class PrestatieRescource {
 		return array.toString();
 	}
 	
+	//verwijderd een gewicht prestatie uit de database
 	@DELETE
 	@Path("/gewicht{prestatienummer}")
 	@Produces("application/json")
@@ -84,6 +87,7 @@ public class PrestatieRescource {
 		return Response.status(200).entity(bericht).build();
 }
 	
+	//geeft een individuele gewichtprestatie van een sporter
 	@GET
 	@Path("/eengewicht{prestatienummer}")
 	@Produces("application/json")
@@ -104,6 +108,7 @@ public class PrestatieRescource {
 		return object.toString();
 }
 	
+	//geeft een individuele cardioprestatie van een sporter
 	@GET
 	@Path("/eencardio{prestatienummer}")
 	@Produces("application/json")
@@ -124,6 +129,7 @@ public class PrestatieRescource {
 		return object.toString();
 }
 	
+	//insert een gewichtprestatie in de database
 	@PUT
 	@Path("/eengewicht{prestatienummer}")
 	@Produces("application/json")
@@ -145,6 +151,7 @@ public class PrestatieRescource {
 		return Response.status(200).entity(bericht).build();
 	}
 	
+	//insert een cardioprestatie in de database
 	@PUT
 	@Path("/eencardio{prestatienummer}")
 	@Produces("application/json")
@@ -165,6 +172,7 @@ public class PrestatieRescource {
 		return Response.status(200).entity(bericht).build();
 	}
 	
+	//verwijderd een individuele cardioprestatie uit de database
 	@DELETE
 	@Path("/cardio{prestatienummer}")
 	@Produces("application/json")

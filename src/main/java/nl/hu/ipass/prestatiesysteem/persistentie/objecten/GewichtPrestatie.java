@@ -9,6 +9,7 @@ public class GewichtPrestatie {
 	private int sets;
 	private int reps;
 	
+	//constructor voor het maken van een GewichtPrestatie object vanuit de database
 	public GewichtPrestatie(int prestatienummer, Sporter sporter, Oefening oefening, String datum, int volume, int sets,
 			int reps) {
 		super();
@@ -20,6 +21,8 @@ public class GewichtPrestatie {
 		this.sets = sets;
 		this.reps = reps;
 	}
+	
+	//constructor voor de POST statement richting de database
 	public GewichtPrestatie(Sporter sporter, Oefening oefening, int volume, int sets,
 			int reps) {
 		super();
@@ -29,6 +32,8 @@ public class GewichtPrestatie {
 		this.sets = sets;
 		this.reps = reps;
 	}
+	
+	//hieronder zijn alle getters en setters te vinden
 	public int getPrestatienummer() {
 		return prestatienummer;
 	}

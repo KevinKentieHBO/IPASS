@@ -18,10 +18,12 @@ public class SporterService {
 	public OefeningPostgresDaoImpl Oefeningdao = new OefeningPostgresDaoImpl();
 	public SporterDaoPostgresImpl Sporterdao = new SporterDaoPostgresImpl();
 	
+	//Geeft een sporter gezocht met zijn username/email
 	public Sporter getSporter(String username){
 		return Sporterdao.findByUsername(username);
 	}
 	
+	//voegt een sporter toe aan de database
 	public boolean voegSporterToe(String voornaam, String tussenvoegsel, String achternaam, String email, String wachtwoord, int telefoonnummer, String geboortedatum, int gewicht) {
 		Sporter s = new Sporter(voornaam, tussenvoegsel, achternaam, email, wachtwoord, telefoonnummer, geboortedatum, gewicht);
 		return Sporterdao.save(s);

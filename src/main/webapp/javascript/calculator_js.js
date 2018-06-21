@@ -1,6 +1,10 @@
+//geeft een eventlistner aan de button "calorieverbranding" mee
 document.querySelector("#calorieverbranding").addEventListener("click",function(){mijnUsername("calorie");});
+//geeft een eventlistner aan de button "repmax" mee
 document.querySelector("#repmax").addEventListener("click",function(){mijnUsername("repmax");});
 
+//Deze functie weergeeft velden die ingevult moeten worden! Wanneer deze velden ingevult zijn en er op de knop
+//gedrukt wordt, wordt er een berekening uitgevoerd die de BMR bepaalt.
 function showCalorie(json){	
 		document.querySelector("#calculatorlijst").innerHTML="<button id='calorieverbranding'>Bereken BMR</button><button id='repmax'>Bereken 1 rep max</button>";
 		document.querySelector("#calculatorlijst").innerHTML+='<br><h1>Wat is je BMR (Basal Metabolic Rate)?</h1><br><p>De BMR is de standaard meting van het metabolisme. Dit is het aantal calorieen dat je lichaam nodig heeft om je lichaam werkend te houden. Het aantal calorieen is dan gelijk aan het verbruik van het lichaam in rust. Het gaat hier alleen om de werking van het lichaam zoals ademhalen, verteren en het regelen van de hartslag. De BMR verschilt per persoon. Iedereen heeft een ander metabolisme. Het metabolisme bepaalt voor een groot deel hoeveel iemand aankomt of afvalt. Een sneller metabolisme zorgt ervoor dat je makkelijker afvalt. Een langzaam metabolisme zorgt ervoor dat je makkelijker aankomt. </p>'
@@ -32,6 +36,8 @@ function showCalorie(json){
 			}});
 	}
 
+//Deze functie weergeeft velden die ingevult moeten worden! Wanneer deze velden ingevult zijn en er op de knop
+//gedrukt wordt, wordt er een berekening uitgevoerd die de one rep max bepaalt.
 function showRepMax(json){
 	document.querySelector("#calculatorlijst").innerHTML="<button id='calorieverbranding'>Bereken BMR</button><button id='repmax'>Bereken 1 rep max</button>";
 	document.querySelector("#calculatorlijst").innerHTML+='<br><h1>Wat is One rep max?</h1><br><p>One rep maximum (1RM) bij krachttraining, betekend de maximale hoeveelheid gewicht dat men kan tillen, met een herhaling voor een bepaalde oefening. De One Repetition Maximum wordt dan gebruikt, om te bepalen wat de maximale sterkte van een individu is en de methode voor het bepalen van de winnaar aan evenementen, zoals powerlifting en gewichtheffen wedstrijden. One repetition maximum kan ook gebruikt worden, als bovengrens om de gewenste load (als een percentage van de 1RM) voor een oefening te kunnen bepalen.</p>'
@@ -54,7 +60,10 @@ function showRepMax(json){
 }
 
 
-
+//De username van de ingelogde gebruiker wordt opgezocht en er wordt gekeken op welke knop er geklikt is
+//doormiddel van het type. als het type repmax als waarde heeft dan wordt de methode showRepMax uitgevoerd
+//is dit niet het geval dan wordt de methode showCalorie uitgevoerd. met beide methodes word een JSON waarin informatie
+//van de ingelogde sporter te vinden is
 function mijnUsername(type){
 	function parseJwt (token) {
 		var base64Url = token.split('.')[1];
@@ -78,6 +87,7 @@ function mijnUsername(type){
 		});
 }
 
+//uitlog functie
 function Uitloggen(){
 	sessionStorage.removeItem('myJWT');
 	window.location.href = "index.html"

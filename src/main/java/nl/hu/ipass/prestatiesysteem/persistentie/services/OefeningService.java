@@ -17,24 +17,29 @@ public class OefeningService {
 	public OefeningPostgresDaoImpl Oefeningdao = new OefeningPostgresDaoImpl();
 	public SporterDaoPostgresImpl Sporterdao = new SporterDaoPostgresImpl();
 	
+	//Zoekt alle oefeningen uit de database
 	public List<Oefening> getAllOefeningen(){
 		return Oefeningdao.findAll();
 	}
 	
+	//Zoekt alle cardioprestaties van een individuele sporter
 	public List<CardioPrestatie> getAllCardioPrestaties(int sportersnummer){
 		return Cardiodao.findAllById(sportersnummer);
 	}
 	
+	//Zoekt alle gewichtprestaties van een individuele sporter
 	public List<GewichtPrestatie> getAllGewichtPrestaties(int sportersnummer){
 		return Gewichtdao.findAllById(sportersnummer);
 	}
 	
+	//Zoekt alle prestaties in een lijst van het type Object
 	public List<Object> getAllPrestaties(int sportersnummer){
 		List<Object> allePrestaties = new ArrayList<Object>(Cardiodao.findAllById(sportersnummer));
 		allePrestaties.addAll(Gewichtdao.findAllById(sportersnummer));
 		return allePrestaties;
 	}
 	
+	//Delete een cardioprestatie wanneer er een cardioprestatie gevonden kan worden met het prestatienummer dat mee gegeven wordt
 	public boolean deleteCardioPrestatie(int prestatienummer) {
 		boolean resultaat = false;
 		CardioPrestatie c = Cardiodao.findByNummer(prestatienummer);
@@ -46,6 +51,7 @@ public class OefeningService {
 		return resultaat;
 	}
 	
+	//Delete een gewichtprestatie wanneer er een gewichtprestatie gevonden kan worden met het prestatienummer dat mee gegeven wordt
 	public boolean deleteGewichtPrestatie(int prestatienummer) {
 		boolean resultaat = false;
 		GewichtPrestatie g = Gewichtdao.findByNummer(prestatienummer);
@@ -57,6 +63,7 @@ public class OefeningService {
 		return resultaat;
 	}
 	
+	//voegt een cardioprestatie toe aan de database
 	public CardioPrestatie voegCardioToe(String username, String oefeningnaam, int sessieduur,
 			int afstand, int snelheid) {
 		CardioPrestatie c = new CardioPrestatie(Sporterdao.findByUsername(username),Oefeningdao.findByNaam(oefeningnaam),sessieduur,afstand,snelheid);
@@ -67,6 +74,7 @@ public class OefeningService {
 		return c;	
 	}
 	
+	//voegt een gewichtprestatie toe aan de database
 	public GewichtPrestatie voegGewichtToe(String username, String oefeningnaam, int volume,
 			int sets, int reps) {
 		GewichtPrestatie g = new GewichtPrestatie(Sporterdao.findByUsername(username),Oefeningdao.findByNaam(oefeningnaam),volume,sets,reps);
@@ -77,6 +85,7 @@ public class OefeningService {
 		return g;	
 	}
 	
+	//Update een cardio prestatie in de database
 	public CardioPrestatie updateCardio(int prestatienummer, int sessieduur, int snelheid, int afstand) {
 		CardioPrestatie c = Cardiodao.findByNummer(prestatienummer);
 		c.setAfstand(afstand);
@@ -88,6 +97,7 @@ public class OefeningService {
 		return c;
 	}
 	
+	//update een gewichtprestatie in de database
 	public GewichtPrestatie updateGewicht(int prestatienummer, int volume, int sets, int reps) {
 		GewichtPrestatie g = Gewichtdao.findByNummer(prestatienummer);
 		g.setVolume(volume);

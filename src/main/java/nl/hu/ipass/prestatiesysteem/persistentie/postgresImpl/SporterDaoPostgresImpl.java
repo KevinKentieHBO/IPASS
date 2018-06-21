@@ -12,6 +12,7 @@ import nl.hu.ipass.prestatiesysteem.persistentie.objecten.Sporter;
 
 public class SporterDaoPostgresImpl extends PostgresBaseDao implements SporterDao {
 	
+	//Deze methode zoekt een individuele sporter op bij zijn username/email
 	@Override
 	public Sporter findByUsername(String username) {
 		Sporter desporter = null;
@@ -34,6 +35,7 @@ public class SporterDaoPostgresImpl extends PostgresBaseDao implements SporterDa
 		return desporter;
 	}
 	
+	//deze methode insert een sporter in de database
 	@Override
 	public boolean save(Sporter sporter) {
 		boolean resultaat = false;
@@ -55,6 +57,7 @@ public class SporterDaoPostgresImpl extends PostgresBaseDao implements SporterDa
 		return resultaat;
 	}
 	
+	//deze methode update de waardes van eem individuele sporter in de database
 	@Override
 	public boolean update(Sporter sporter) {
 		boolean resultaat = false;
@@ -76,6 +79,7 @@ public class SporterDaoPostgresImpl extends PostgresBaseDao implements SporterDa
 		return resultaat;
 	}
 	
+	//deze methode zoekt de rol van de gebruiker (altijd user)
 	@Override
 	public String findRoleForUser(String username, String password) throws SQLException {
 		String rol = null;
