@@ -17,14 +17,13 @@ function registreer(){
 function validateForm()
 {
     var a=document.forms["registratieform"]["voornaam"].value;
-    var b=document.forms["registratieform"]["tussenvoegsel"].value;
     var c=document.forms["registratieform"]["achternaam"].value;
     var d=document.forms["registratieform"]["email"].value;
     var e=document.forms["registratieform"]["wachtwoord"].value;
     var f=document.forms["registratieform"]["telefoonnummer"].value;
     var g=document.forms["registratieform"]["geboortedatum"].value;
     var h=document.forms["registratieform"]["gewicht"].value;
-    if (a==null || a=="" || b==null || b=="" || c==null || c==""|| d==null || d==""|| e==null || e==""|| f==null || f==""|| g==null || g==""|| h==null || h=="")
+    if (a==null || a=="" || c==null || c==""|| d==null || d==""|| e==null || e==""|| f==null || f==""|| g==null || g==""|| h==null || h=="")
     {
         alert("Vul alle velden in!");
         return false;
